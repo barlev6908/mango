@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>Mango MVP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff4e6;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango 🍋</title>
 
-    h1 {
-      margin-top: 20px;
-    }
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#fff4d6;
+    text-align:center;
+}
 
-    .stage {
-      position: relative;
-      width: 250px;
-      height: 400px;
-      margin: 20px auto;
-    }
+h1{
+    margin-top:20px;
+    font-size:40px;
+}
 
-    .layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
+.avatar{
+    width:200px;
+    height:300px;
+    margin:30px auto;
+    position:relative;
+}
 
-    .controls {
-      margin: 20px;
-    }
+.head{
+    width:120px;
+    height:120px;
+    background:#ffd6b0;
+    border-radius:50%;
+    margin:0 auto;
+}
 
-    button {
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 8px;
-      border: none;
-      background: #ffa726;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.body{
+    width:140px;
+    height:150px;
+    background:#ff9f43;
+    margin:0 auto;
+    margin-top:-10px;
+    border-radius:20px;
+}
 
-    .dance {
-      animation: bounce 0.8s infinite;
-    }
+.buttons{
+    margin-top:30px;
+}
 
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
+button{
+    padding:15px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    background:#ff9f43;
+    color:white;
+    margin:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#ff7f00;
+}
+</style>
 </head>
+
 <body>
 
-<h1>🥭 Mango</h1>
+<h1>Mango 🍋</h1>
 
-<div class="stage" id="avatar">
-  <img id="body" class="layer" src="https://i.imgur.com/8QfQ6gP.png">
-  <img id="shirt" class="layer" src="https://i.imgur.com/VpYqQ0M.png">
+<div class="avatar">
+    <div class="head"></div>
+    <div class="body"></div>
 </div>
 
-<div class="controls">
-  <button onclick="changeShirt()">החלף חולצה</button>
-  <button onclick="toggleDance()">ריקוד 3 דק'</button>
+<div class="buttons">
+    <button onclick="changeClothes()">החלף בגדים</button>
 </div>
 
 <script>
-  const shirts = [
-    "https://i.imgur.com/VpYqQ0M.png",
-    "https://i.imgur.com/bC9XU8L.png",
-    "https://i.imgur.com/lC4hXcU.png"
-  ];
-
-  let currentShirt = 0;
-
-  function changeShirt() {
-    currentShirt = (currentShirt + 1) % shirts.length;
-    document.getElementById("shirt").src = shirts[currentShirt];
-  }
-
-  function toggleDance() {
-    const avatar = document.getElementById("avatar");
-    avatar.classList.toggle("dance");
-  }
+function changeClothes(){
+    const body = document.querySelector('.body');
+    const colors = ["#ff9f43","#6ab04c","#22a6b3","#be2edd","#eb4d4b"];
+    const randomColor = colors[Math.floor(Math.random()*colors.length)];
+    body.style.background = randomColor;
+}
 </script>
 
 </body>
