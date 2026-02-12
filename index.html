@@ -1,89 +1,118 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mango 🍋</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#fff4d6;
-    text-align:center;
-}
-
-h1{
-    margin-top:20px;
-    font-size:40px;
-}
-
-.avatar{
-    width:200px;
-    height:300px;
-    margin:30px auto;
-    position:relative;
-}
-
-.head{
-    width:120px;
-    height:120px;
-    background:#ffd6b0;
-    border-radius:50%;
-    margin:0 auto;
-}
-
-.body{
-    width:140px;
-    height:150px;
-    background:#ff9f43;
-    margin:0 auto;
-    margin-top:-10px;
-    border-radius:20px;
-}
-
-.buttons{
-    margin-top:30px;
-}
-
-button{
-    padding:15px 25px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    background:#ff9f43;
-    color:white;
-    margin:10px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#ff7f00;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mango</title>
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#fff4d6;
+      text-align:center;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:44px;
+      font-weight:800;
+    }
+    .wrap{
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 10px 16px 24px;
+    }
+    .card{
+      background: rgba(255,255,255,0.6);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .stage{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding: 10px 0 18px;
+    }
+    img#char{
+      max-width: 280px;
+      width: 70vw;
+      height: auto;
+      border-radius: 18px;
+      background: #ffffff;
+    }
+    .btns{
+      display:flex;
+      gap: 12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    button{
+      padding: 14px 18px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #ff9f43;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover{ background:#ff7f00; }
+    .small{
+      margin-top:10px;
+      opacity:0.7;
+      font-size:14px;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <h1>🥭 Mango</h1>
 
-<h1>Mango 🍋</h1>
+    <div class="card">
+      <div class="stage">
+        <img id="char" src="boy1.png" alt="דמות" />
+      </div>
 
-<div class="avatar">
-    <div class="head"></div>
-    <div class="body"></div>
-</div>
+      <div class="btns">
+        <button id="nextBtn">החלף בגדים</button>
+        <button id="randomBtn">בחר אקראי</button>
+      </div>
 
-<div class="buttons">
-    <button onclick="changeClothes()">החלף בגדים</button>
-</div>
+      <div class="small" id="label">סט 1 מתוך 5</div>
+    </div>
+  </div>
 
-<script>
-function changeClothes(){
-    const body = document.querySelector('.body');
-    const colors = ["#ff9f43","#6ab04c","#22a6b3","#be2edd","#eb4d4b"];
-    const randomColor = colors[Math.floor(Math.random()*colors.length)];
-    body.style.background = randomColor;
-}
-</script>
+  <script>
+    const outfits = ["boy1.png","boy2.png","boy3.png","boy4.png","boy5.png"];
+    let idx = 0;
 
+    const img = document.getElementById("char");
+    const label = document.getElementById("label");
+
+    function render(){
+      img.src = outfits[idx];
+      label.textContent = `סט ${idx+1} מתוך ${outfits.length}`;
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", ()=>{
+      idx = (idx + 1) % outfits.length;
+      render();
+    });
+
+    document.getElementById("randomBtn").addEventListener("click", ()=>{
+      let next = idx;
+      while(next === idx && outfits.length > 1){
+        next = Math.floor(Math.random() * outfits.length);
+      }
+      idx = next;
+      render();
+    });
+
+    // אם התמונה לא נטענת - נציג הודעה ברורה
+    img.addEventListener("error", ()=>{
+      label.textContent = "לא נמצאה תמונה. בדקי שהעלית boy1.png..boy5.png לריפו באותה תיקייה של index.html";
+    });
+  </script>
 </body>
 </html>
